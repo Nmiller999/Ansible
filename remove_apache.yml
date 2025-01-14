@@ -8,12 +8,12 @@
      apt:
        update_cache: yes
 
-  - name: Installs Apache2
+  - name: Uninstalls Apache2
     apt:
       name: apache2
-      state: latest
+      state: absent
 
-  - name: Installs php support for apache
+  - name: Uninstalls php support for apache
     apt:
       name: libapache2-mod-php
-      state: latest
+      state: absent
