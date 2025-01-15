@@ -1,0 +1,47 @@
+---
+
+- hosts: web_servers
+  become: true
+  pre_tasks:
+
+  - name: install updates (RHEL)
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "Rocky"
+
+  - name: install updates (Debian)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install Apache and php Ubuntu
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install Apache and php Rocky
+    yum:
+      name:
+        - httpd
+        - php
+      state: latest
+    when: ansible_distribution == "Rocky"
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb (RHEL)
+    yum:
+      name: mariadb
+      state: latest
+    when: ansible_distribution == "Rocky"

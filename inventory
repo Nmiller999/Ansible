@@ -1,10 +1,16 @@
-# Servers Linux
-10.106.106.231 apache_package=apache2 php_package=libapache2-mod-php
-10.106.106.232 apache_package=apache2 php_package=libapache2-mod-php
-10.106.106.233 apache_package=apache2 php_package=libapache2-mod-php
-10.106.106.234 apache_package=httpd php_package=php
-# Router
-# 10.106.106.1
+[web_servers]
+10.106.106.231
+10.106.106.234
 
-# DNS/DHCP
-#10.106.106.253
+[db_servers]
+10.106.106.234
+
+[docker_servers]
+10.106.106.232
+10.106.106.233
+
+[Routers]
+#10.106.106.1
+
+[DNS_servers]
+10.106.106.253
