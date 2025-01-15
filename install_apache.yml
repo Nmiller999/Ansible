@@ -20,3 +20,21 @@
       name: libapache2-mod-php
       state: latest
     when: ansible_distribution == "Ubuntu"
+
+  - name: Update Repository Index
+    yum:
+      update_cache: yes
+    when: ansible_distribution == "Rocky"
+
+  - name: Install apache2
+    yum:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "Rocky"
+
+  - name: Install php support
+    yum:
+      name: php
+      state: latest
+    when: ansible_distribution == "Rocky"
+
