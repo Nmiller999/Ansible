@@ -4,37 +4,10 @@
   become: true
   tasks:
 
-  -  name: update repository index
-     apt:
-       update_cache: yes
-     when: ansible_distribution == "Ubuntu"
-
-  - name: Installs Apache2
-    apt:
-      name: apache2
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: Installs php support for apache
-    apt:
-      name: libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: Update Repository Index
-    yum:
+  - name: Installs Apache and php
+    package:
       update_cache: yes
-    when: ansible_distribution == "Rocky"
-
-  - name: Install apache2
-    yum:
-      name: httpd
+      name:
+        - "{{ apache_pachage }}"
+        - "{{php}}"
       state: latest
-    when: ansible_distribution == "Rocky"
-
-  - name: Install php support
-    yum:
-      name: php
-      state: latest
-    when: ansible_distribution == "Rocky"
-
