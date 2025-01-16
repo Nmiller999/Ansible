@@ -1,0 +1,43 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (RHEL)
+    tags: always
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "Rocky"
+
+  - name: install updates (Debian)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create Ansible user
+    tags: always
+    user:
+      name: Ansible
+      groups: root
+
+  - name: add ssh key for Ansible
+    tags: always
+    authorized_key:
+      user: Ansible
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9uoEyTqHtHF6EqVi8OwLvlbTQ5DVLZ098LtC1GzQx8 Ubuntu vm"
+
+  - name: add sudores file for Ansible
+    copy:
+      src: sudoer_Ansible
+      dest: /etc/sudoers.d/Ansible
+      owner: root
+      group: root
+      mode: 0440
