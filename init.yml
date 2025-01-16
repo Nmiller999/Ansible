@@ -9,7 +9,7 @@
     yum:
       update_only: yes
       update_cache: yes
-    when: ansible_distribution == "Rocky"
+    when: ansible_distribution_file_variety == "RedHat"
 
   - name: install updates (Debian)
     tags: always
