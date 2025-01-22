@@ -8,10 +8,10 @@
     apt:
       update_cache: yes
       upgrade: dist
-    when: ansible_distribution in ["Ubuntu", "Debian"]
+    when: ansible_distribution_file_variety == "Debian"
 
   - name: Install updates (RHEL, Rocky)
     yum:
       update_cache: yes
       update_only: yes
-    when: ansible_distribution in ["Rocky", "Redhat"]
+    when: ansible_distribution_file_variety == "RedHat"

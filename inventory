@@ -4,7 +4,7 @@
 [db_servers]
 10.106.106.234
 
-[Prox_servers]
+[prox_servers]
 10.106.106.250
 10.106.106.2
 10.106.106.215
@@ -15,7 +15,7 @@
 [docker_servers]
 10.106.106.222
 
-[Routers]
+[routers]
 #10.106.106.1
 
 [DNS_servers]
