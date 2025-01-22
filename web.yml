@@ -9,14 +9,45 @@
     yum:
       update_cache: yes
     changed_when: false
-    when: ansible_distribution == "Rocky"
+    when: ansible_distribution_file_variety == "RedHat"
 
   - name: install updates (Debian)
     tags: always
     apt:
       update_cache: yes
     changed_when: false
-    when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution_file_variety == "Debian"
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: workstations
+  become: true
+  roles:
+    - workstations
+
+- hosts: web_servers
+  become: true
+  roles:
+    - web_servers
+
+- hosts: db_servers
+  become: true
+  roles:
+    - db_servers
+
+- hosts: docker_servers
+  become: true
+  roles:
+    - docker_servers
+
+- hosts: prox_servers
+  become: true
+  roles:
+    - prox_servers
+
 
 - hosts: workstations
   become: true
